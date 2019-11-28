@@ -1,0 +1,33 @@
+---
+
+- name: enable => ufw
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: allow => http
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+  when: install_nginx == true  
+
+- name: allow => https
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+  when: install_nginx == true
+
+- name: allow => ssh
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
+- name: allow => all access to tcp port 8080
+  ufw:
+    rule: allow
+    port: '8080'
+    proto: tcp
+  when: install_nginx == false

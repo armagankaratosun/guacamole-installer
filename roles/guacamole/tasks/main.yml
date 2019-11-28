@@ -1,0 +1,13 @@
+---
+ - name: install => guacd
+   include: install_guacd.yml
+
+ - name: install => postgres on docker
+   include: install_postgres_docker.yml
+
+ - name: init => postgres db
+   include: init_postgres.yml
+
+ - name: install => guacamole
+   include: install_guacamole.yml
+

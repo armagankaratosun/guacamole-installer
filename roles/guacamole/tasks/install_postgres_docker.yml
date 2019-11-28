@@ -1,0 +1,14 @@
+---
+
+   - name: create => postgres container
+     docker_container:
+      name: '{{postgre_container_name}}'
+      image: postgres
+      state: started
+      volumes:
+      - "/volumes/postgres:/var/lib/postgresql/data"
+      env:
+        POSTGRES_USER: "{{guacamole_db_user_name}}"
+        POSTGRES_PASSWORD: "{{guacamole_db_pass}}"
+        POSTGRES_DB: "{{guacamole_db_name}}"
+

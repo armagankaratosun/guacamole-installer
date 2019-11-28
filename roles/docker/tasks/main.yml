@@ -1,0 +1,10 @@
+---
+ - name: apt install => docker
+   include: ubuntu.yml
+   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+
+ - name: yum install => docker
+   include: centos.yml
+   when: ansible_distribution == 'Centos' or ansible_distribution == 'Red Hat'
+

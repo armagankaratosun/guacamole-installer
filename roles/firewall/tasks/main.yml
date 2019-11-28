@@ -1,0 +1,23 @@
+---
+
+- name: start => ufw.service
+  systemd:
+   name: ufw
+   enabled: yes
+   state: started
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: configure => ufw
+  include: ufw.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: start => firewalld.service
+  systemd:
+   name: firewalld
+   enabled: yes
+   state: started
+  when: ansible_distribution == 'Centos' or ansible_distribution == 'Red Hat'
+
+- name: configure => firewalld
+  include: firewalld.yml
+  when: ansible_distribution == 'Centos' or ansible_distribution == 'Red Hat'

@@ -1,0 +1,8 @@
+---
+
+   - name: create => guacd container
+     docker_container:
+      name: '{{guacd_container_name}}'
+      image: guacamole/guacd
+      state: started
+

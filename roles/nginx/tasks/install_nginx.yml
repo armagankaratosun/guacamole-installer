@@ -1,0 +1,51 @@
+
+---
+
+   - name: create => nginx volume
+     file:
+      path: "{{ item }}"
+      state: directory
+     with_items: 
+       - /volumes/nginx/conf.d
+       - /volumes/nginx/ssl
+
+   - name: copy => certs
+     copy:
+      src: "{{ item }}"
+      dest: /volumes/nginx/ssl
+      remote_src: yes
+     with_items: 
+      - /etc/ssl/private/guacamole.key
+      - /etc/ssl/certs/guacamole.crt
+     when: self_signed_certificate == true
+
+   - name: copy => nginx.conf
+     template:
+      src: ssl_nginx_default.conf
+      dest: /volumes/nginx/conf.d/default.conf
+     when: self_signed_certificate == true
+
+   - name: copy => nginx.conf
+     template:
+      src: nginx_default.conf
+      dest: /volumes/nginx/conf.d/default.conf
+     when: self_signed_certificate == false
+
+   - name: create => nginx container
+     docker_container:
+      name: '{{nginx_container_name}}'
+      image: nginx
+      state: started
+      links:
+      - "{{guacamole_container_name}}:guacamole"
+      - "{{guacd_container_name}}:guacd"
+      - "{{postgre_container_name}}:postgres"
+      volumes:
+      - "/volumes/nginx/conf.d:/etc/nginx/conf.d"
+      - "/volumes/nginx/ssl:/etc/ssl/"
+      ports:
+      - "80:80"
+      - "443:443"
+
+
+      

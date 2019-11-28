@@ -1,0 +1,22 @@
+---
+- name: Install Apache Guacamole on Docker
+  hosts: "{{host_name}}"
+  become: true
+  become_user: root
+  become_method: sudo
+  vars_files: default.yml    
+
+
+  roles: 
+      - role: docker
+        when: install_docker == true
+
+      - role: guacamole 
+        when: install_guacamole == true
+
+      - role: nginx
+        when: install_nginx == true
+
+      - role: firewall
+        when: configure_fw == true
+

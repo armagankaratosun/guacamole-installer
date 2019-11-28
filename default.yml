@@ -1,0 +1,30 @@
+#############################################################
+#                                                           #
+#         Default Variables For Guacamole Installer         #
+#                                                           #
+#   Please change the default value for database password   #
+#                                                           #
+#############################################################
+
+
+# default variables for guacamole install
+
+ install_docker: true # install docker-ce to the host, only supported on CentOS and Ubuntu
+ install_guacamole: true # install guacamole on docker 
+ install_nginx: true # install nginx for reverese proxy
+ configure_fw: true # configure ufw or firewalld for security. Only supported on CentOS and Ubuntu
+
+# default variables for nginx-ansible-role.
+
+ self_signed_certificate: true # this will create a sel-signed certificate and enable https support. Only supported on CentOS and Ubuntu.
+ nginx_container_name: nginx  # name of the nginx container
+
+
+# default variables for guacamole-ansible-role.
+
+ postgre_container_name: pg_docker # name of the postgresql container
+ guacd_container_name: guacd # name of the guacd container
+ guacamole_container_name: guacamole # name of the guacamole container
+ guacamole_db_name: guacamole_db # Database name
+ guacamole_db_user_name: guacamole_db_user # Database user
+ guacamole_db_pass: guacamole # Database password

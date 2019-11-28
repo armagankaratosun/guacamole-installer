@@ -1,0 +1,30 @@
+---
+   - name: create => guacamole container without ngnix
+     docker_container:
+      name: '{{guacamole_container_name}}'
+      image: guacamole/guacamole
+      state: started
+      links:
+      - "{{guacd_container_name}}:guacd"
+      - "{{postgre_container_name}}:postgres"
+      ports:
+      - "8080:8080"
+      env:
+        POSTGRES_USER: "{{guacamole_db_user_name}}"
+        POSTGRES_PASSWORD: "{{guacamole_db_pass}}"
+        POSTGRES_DATABASE: "{{guacamole_db_name}}"
+     when: install_nginx == false
+
+   - name: create => guacamole container with nginx
+     docker_container:
+      name: '{{guacamole_container_name}}'
+      image: guacamole/guacamole
+      state: started
+      links:
+      - "{{guacd_container_name}}:guacd"
+      - "{{postgre_container_name}}:postgres"
+      env:
+        POSTGRES_USER: "{{guacamole_db_user_name}}"
+        POSTGRES_PASSWORD: "{{guacamole_db_pass}}"
+        POSTGRES_DATABASE: "{{guacamole_db_name}}"
+     when: install_nginx == true

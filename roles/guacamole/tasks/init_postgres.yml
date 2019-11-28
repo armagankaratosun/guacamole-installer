@@ -1,0 +1,9 @@
+---
+
+   - name: run => initdb.sql
+     shell: |
+         docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > initdb.sql
+         docker cp ./initdb.sql {{postgre_container_name}}:/docker-entrypoint-initdb.d/initdb.sql    
+         docker exec -u postgres {{postgre_container_name}} psql {{ guacamole_db_name }} {{guacamole_db_user_name}} -f /docker-entrypoint-initdb.d/initdb.sql
+         rm -rf ./initdb.sql
+        

@@ -1,0 +1,24 @@
+---
+
+- firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+  when: install_nginx == true
+
+- firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+  when: install_nginx == true
+
+- firewalld:
+    service: ssh
+    permanent: yes
+    state: enabled
+
+- firewalld:
+    port: 8080/tcp
+    permanent: yes
+    state: enabled
+  when: install_nginx == false

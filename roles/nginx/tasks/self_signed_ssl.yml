@@ -1,0 +1,22 @@
+---
+
+   - name: apt install => openssl
+     apt:
+      name: openssl
+      state: latest
+     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+   - name: yum install => openssl
+     yum:
+      name: openssl
+      state: latest
+     when: ansible_distribution == 'Centos' or ansible_distribution == 'Red Hat'
+
+   - name: create => directories
+     file:
+      path: "/etc/ssl/private"
+      state: directory
+      mode: 0755
+
+   - name: generate => self-signed certificate
+     command: openssl req -x509 -nodes -days 3650 -newkey rsa:4096 -keyout /etc/ssl/private/guacamole.key -out /etc/ssl/certs/guacamole.crt -subj "/C=TR/ST=Turkey/L=Istanbul/O=guacamole/CN={{host_name}}"

@@ -1,0 +1,38 @@
+---
+
+    - name: install =>  required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'aptitude', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python-pip', 'virtualenv', 'python-setuptools']
+
+    - name: add => docker GPG apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: add => docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: install => docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: install => pip docker module
+      pip:
+        name: docker
+
+    - name: start => docker.service
+      systemd:
+       name: docker
+       enabled: yes
+       state: started
+
+    - name: adding => user '{{ docker_user }}' to group docker
+      user:
+       name: '{{docker_user}}'
+       groups: docker
+       append: yes
+      when: docker_user is defined
+
+    - name: reboot => now
+      reboot:

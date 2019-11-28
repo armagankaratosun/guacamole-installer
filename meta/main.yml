@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Armağan Karatosun
+  description: Ansible role to install and configure Guacamole with Psql on Docker
+
+  license: GPLv2
+
+  min_ansible_version: 2.2
+
+  platforms:
+  - name: Ubuntu
+
+
+  galaxy_tags: [html5,rdp,vnc,ssh,telnet]
+
+dependencies: []

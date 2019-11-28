@@ -1,0 +1,9 @@
+---
+
+ - name: create => self-signed certificate
+   include: self_signed_ssl.yml
+   when: self_signed_certificate == true
+
+ - name: install => nginx
+   include: install_nginx.yml
+ 
