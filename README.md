@@ -36,7 +36,7 @@ Quickstart
 The installer has the default values set, so you can just install Apache Guacamole with `ansible-playbook -i your_inventory_file  --extra-vars "host_name=<YOUR_IP_ADDRESS>" installer.yml`. 
 
 ```bash
- git clone https://gitlab.eumetsat.int/karatosun/guacamole-ansible-role.git
+ git clone https://github.com/armagankaratosun/guacamole-installer.git
  ansible-playbook -i your_inventory_file  --extra-vars "host_name=<YOUR_IP_ADDRESS>" installer.yml
 ```
 This installer can also be used with Ansible Tower. 
