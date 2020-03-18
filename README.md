@@ -126,3 +126,4 @@ TODO
 - [ ] Test the installation on CentOS 7
 - [ ] CentOS 8 support
 - [ ] SELinux support (maybe?)
+- [ ] Let's Encrypt support instead of self-signed certificate
