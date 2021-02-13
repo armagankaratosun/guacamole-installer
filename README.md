@@ -57,7 +57,7 @@ Role Variables
 
 I will add the descriptions later. But the variable names are quite obvious. 
 
-You can set the variables from `installer.yml` file or pass them as an extra variables like `--extra-vars "postgre_container_name=<DEFAULT_NAME>"`.
+You can set the variables from `default.yml` file or pass them as an extra variables like `--extra-vars "postgre_container_name=<DEFAULT_NAME>"`.
 
 Variables can be set from Ansible Tower using **Extra Variables** section on Template creation.
 
